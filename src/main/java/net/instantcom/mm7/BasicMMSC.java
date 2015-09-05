@@ -25,6 +25,9 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSocketFactory;
+
 /**
  * MMSC implementation using standard java {@link HttpURLConnection} to connect
  * to MMSC. Use {@link MM7Context} to configure message
@@ -51,6 +54,10 @@ public class BasicMMSC implements MMSC {
 			final MM7Context ctx = getContext();
 			final URL u = new URL(getUrl());
 			final HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+			
+			if(sslSocketFactory != null && conn instanceof HttpsURLConnection) {
+				((HttpsURLConnection) conn).setSSLSocketFactory(sslSocketFactory);
+			}
 
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
@@ -120,6 +127,10 @@ public class BasicMMSC implements MMSC {
 	public void setContext(MM7Context context) {
 		this.context = context;
 	}
+	
+	public void setSslSocketFactory(SSLSocketFactory sslSocketFactory) {
+		this.sslSocketFactory = sslSocketFactory;
+	}
 
 	@Override
 	public MM7Context getContext() {
@@ -131,4 +142,5 @@ public class BasicMMSC implements MMSC {
 
 	private String url;
 	private MM7Context context;
+	private SSLSocketFactory sslSocketFactory;
 }
