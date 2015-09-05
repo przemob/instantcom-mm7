@@ -34,7 +34,7 @@ class SoapContent extends BasicContent {
 		try {
 			this.doc = new SAXBuilder().build(in);
 		} catch (JDOMException e) {
-			throw new IOException("failed to parse SOAP message", e);
+			throw new IOException("failed to parse SOAP message");
 		}
 	}
 
