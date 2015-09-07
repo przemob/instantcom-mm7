@@ -111,7 +111,6 @@ public class Address implements JDOMSupport {
 		return displayOnly;
 	}
 
-	@Override
 	public void load(Element e) {
 		{
 			String value = e.getAttributeValue("displayOnly", e.getNamespace());
@@ -130,7 +129,6 @@ public class Address implements JDOMSupport {
 		address = e.getText();
 	}
 
-	@Override
 	public Element save(Element parent) {
 		Element e = new Element(addressType.toString(), parent.getNamespace());
 		if (displayOnly) {

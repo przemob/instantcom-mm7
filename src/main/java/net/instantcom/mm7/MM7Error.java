@@ -70,7 +70,6 @@ public class MM7Error extends Exception implements JDOMSupport {
 		return response;
 	}
 
-	@Override
 	public void load(Element element) {
 		Element body = element.getChild("Body", MM7Message.ENVELOPE);
 		Element e = (Element) body.getChildren().get(0);
@@ -92,7 +91,6 @@ public class MM7Error extends Exception implements JDOMSupport {
 		}
 	}
 
-	@Override
 	public Element save(Element parent) {
 		throw new UnsupportedOperationException();
 	}

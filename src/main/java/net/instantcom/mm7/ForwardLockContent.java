@@ -31,32 +31,26 @@ public class ForwardLockContent implements Content {
 		this.boundary = "==Forward-Lock==" + UUID.randomUUID().toString();
 	}
 
-	@Override
 	public String getContentId() {
 		return getPart().getContentId();
 	};
 	
-	@Override
 	public String getContentLocation() {
 		return getPart().getContentLocation();
 	}
 	
-	@Override
 	public String getContentType() {
 		return "application/vnd.oma.drm.message; boundary=\"" + boundary  + "\"";
 	}
 	
-	@Override
 	public List<Content> getParts() {
 		return null;
 	}
 
-	@Override
 	public Iterator<Content> iterator() {
 		return null;
 	}
 		
-	@Override
 	public void writeTo(OutputStream out, String contentId, MM7Context ctx) throws IOException {
 		if (contentId == null) {
 			contentId = getPart().getContentId();

@@ -39,7 +39,6 @@ public class BasicContent implements Content {
 		setParts(parts);
 	}
 
-	@Override
 	public String getContentId() {
 		if (contentId == null) {
 			contentId = UUID.randomUUID().toString();
@@ -51,22 +50,18 @@ public class BasicContent implements Content {
 		return -1;
 	}
 
-	@Override
 	public String getContentLocation() {
 		return contentLocation;
 	}
 
-	@Override
 	public String getContentType() {
 		return contentType;
 	}
 
-	@Override
 	public List<Content> getParts() {
 		return parts;
 	}
 
-	@Override
 	public Iterator<Content> iterator() {
 		Iterator<Content> result;
 		if (parts != null) {
@@ -138,7 +133,6 @@ public class BasicContent implements Content {
 		return b.toString();
 	}
 
-	@Override
 	public void writeTo(OutputStream out, String contentId, MM7Context ctx) throws IOException {
 		if (contentId == null) {
 			contentId = getContentId();

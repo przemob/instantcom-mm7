@@ -39,7 +39,6 @@ public class BasicMMSC implements MMSC {
 		setUrl(url);
 	}
 
-	@Override
 	public SubmitRsp submit(SubmitReq submitReq) throws MM7Error {
 		MM7Response rsp = post(submitReq);
 		if (!(rsp instanceof SubmitRsp)) {
@@ -132,7 +131,6 @@ public class BasicMMSC implements MMSC {
 		this.sslSocketFactory = sslSocketFactory;
 	}
 
-	@Override
 	public MM7Context getContext() {
 		if (context == null) {
 			context = new MM7Context();

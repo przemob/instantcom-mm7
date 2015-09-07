@@ -34,7 +34,6 @@ public class DeliverReq extends MM7Request implements HasContent {
 		return auxApplicInfo;
 	}
 
-	@Override
 	public Content getContent() {
 		return content;
 	}
@@ -116,7 +115,6 @@ public class DeliverReq extends MM7Request implements HasContent {
 		this.auxApplicInfo = auxApplicInfo;
 	}
 
-	@Override
 	public void setContent(Content content) {
 		this.content = content;
 	}

@@ -329,7 +329,6 @@ public class MM7Message implements JDOMSupport {
 		return false;
 	}
 
-	@Override
 	public void load(Element element) {
 		Element body = element.getChild("Body", element.getNamespace());
 
@@ -352,7 +351,6 @@ public class MM7Message implements JDOMSupport {
 		setTransactionId(header.getChildTextTrim("TransactionID", namespace));
 	}
 
-	@Override
 	public Element save(Element parent) {
 		Element e = new Element(getClass().getSimpleName(), namespace);
 		final String mm7Version = getMm7Version();
