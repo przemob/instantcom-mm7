@@ -22,6 +22,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Constructor;
 
+import javax.net.ssl.SSLSocketFactory;
+
 import org.jdom2.output.Format;
 import org.jvnet.mimepull.MIMEConfig;
 
@@ -153,6 +155,14 @@ public class MM7Context {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	public void setSslSocketFactory(SSLSocketFactory sslSocketFactory) {
+		this.sslSocketFactory = sslSocketFactory;
+	}
+	
+	public SSLSocketFactory getSslSocketFactory() {
+		return sslSocketFactory;
+	}
 
 	@SuppressWarnings("unchecked")
 	private void initializeBase64OutputStream() {
@@ -176,4 +186,5 @@ public class MM7Context {
 	private boolean useFirstContentFoundIfHrefIsInvalid = true;
 	private String userAgent = "InstantCom-MM7/" + About.VERSION;
 	private String username;
+	private SSLSocketFactory sslSocketFactory;
 }

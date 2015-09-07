@@ -165,10 +165,10 @@ public class SubmitReq extends MM7Request implements HasContent {
 			e.addContent(new Element("ExpiryDate", e.getNamespace()).setText(expiryDate.toString()));
 		}
 		if (deliveryReport != null) {
-			e.addContent(new Element("DeliveryReport", e.getNamespace()).setText(deliveryReport? "True" : "False"));
+			e.addContent(new Element("DeliveryReport", e.getNamespace()).setText(deliveryReport? "true" : "false"));
 		}
 		if (readReply != null) {
-			e.addContent(new Element("ReadReply", e.getNamespace()).setText(readReply? "True" : "False"));
+			e.addContent(new Element("ReadReply", e.getNamespace()).setText(readReply? "true" : "false"));
 		}
 		if (priority != null) {
 			e.addContent(new Element("Priority", e.getNamespace()).setText(priority.toString()));
@@ -183,7 +183,7 @@ public class SubmitReq extends MM7Request implements HasContent {
 			e.addContent(new Element("ChargedPartyID", e.getNamespace()).setText(chargedPartyId.toString()));
 		}
 		if (distributionIndicator != null) {
-			e.addContent(new Element("DistributionIndicator", e.getNamespace()).setText(distributionIndicator? "True" : "False"));
+			e.addContent(new Element("DistributionIndicator", e.getNamespace()).setText(distributionIndicator? "true" : "false"));
 		}
 
 		// deliveryCondition
@@ -200,12 +200,12 @@ public class SubmitReq extends MM7Request implements HasContent {
 			e.addContent(new Element("ContentClass", e.getNamespace()).setText(contentClass.toString()));
 		}
 		if (drmContent != null) {
-			e.addContent(new Element("DRMContent", e.getNamespace()).setText(drmContent? "True" : "False"));
+			e.addContent(new Element("DRMContent", e.getNamespace()).setText(drmContent? "true" : "false"));
 		}
 		if (content != null) {
 			Element c = new Element("Content", e.getNamespace());
 			if (allowAdaptations != null) {
-				c.setAttribute("allowAdaptations", allowAdaptations? "True" : "False");
+				c.setAttribute("allowAdaptations", allowAdaptations? "true" : "false");
 			}
 			c.setAttribute("href", "cid:mm7-content");
 			e.addContent(c);

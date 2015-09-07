@@ -18,7 +18,6 @@
 
 package net.instantcom.mm7;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -26,7 +25,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLSocketFactory;
+
+import org.apache.commons.codec.binary.Base64;
 
 /**
  * MMSC implementation using standard java {@link HttpURLConnection} to connect
@@ -54,8 +54,8 @@ public class BasicMMSC implements MMSC {
 			final URL u = new URL(getUrl());
 			final HttpURLConnection conn = (HttpURLConnection) u.openConnection();
 			
-			if(sslSocketFactory != null && conn instanceof HttpsURLConnection) {
-				((HttpsURLConnection) conn).setSSLSocketFactory(sslSocketFactory);
+			if(getContext().getSslSocketFactory() != null && conn instanceof HttpsURLConnection) {
+				((HttpsURLConnection) conn).setSSLSocketFactory(getContext().getSslSocketFactory());
 			}
 
 			conn.setDoInput(true);
@@ -70,15 +70,7 @@ public class BasicMMSC implements MMSC {
 			// HTTP Basic authorization
 			if (ctx.getUsername() != null) {
 				String authString = ctx.getUsername() + ':' + ctx.getPassword();
-				try {
-					ByteArrayOutputStream buffer = new ByteArrayOutputStream(128);
-					OutputStream buffer64 = ctx.newBase64OutputStream(buffer);
-					buffer64.write(authString.getBytes("iso-8859-1"));
-					buffer64.close();
-					conn.setRequestProperty("Authorization", "Basic " + buffer.toString("iso-8859-1"));
-				} catch (IOException ioe) {
-					throw new RuntimeException("Failed to add HTTP Basic Authorization header", ioe);
-				}
+				conn.setRequestProperty("Authorization", "Basic " + new String(Base64.encodeBase64(authString.getBytes("iso-8859-1"))));
 			}
 
 			final OutputStream out = conn.getOutputStream();
@@ -111,7 +103,8 @@ public class BasicMMSC implements MMSC {
 				conn.disconnect();
 			}
 		} catch (IOException ioe) {
-			throw new MM7Error("IO error: " + ioe.getMessage());
+			ioe.printStackTrace();
+			throw new MM7Error("IO error: " + ioe.getMessage(), ioe);
 		}
 	}
 
@@ -127,10 +120,6 @@ public class BasicMMSC implements MMSC {
 		this.context = context;
 	}
 	
-	public void setSslSocketFactory(SSLSocketFactory sslSocketFactory) {
-		this.sslSocketFactory = sslSocketFactory;
-	}
-
 	public MM7Context getContext() {
 		if (context == null) {
 			context = new MM7Context();
@@ -140,5 +129,5 @@ public class BasicMMSC implements MMSC {
 
 	private String url;
 	private MM7Context context;
-	private SSLSocketFactory sslSocketFactory;
+	
 }
