@@ -24,10 +24,15 @@ import java.io.OutputStream;
 public class TextContent extends BasicContent {
 
 	public TextContent() {
-		this("");
+		this(null, "");
+	}
+	
+	public TextContent(String text) {
+		this(null, text);
 	}
 
-	public TextContent(String text) {
+	public TextContent(String contentId, String text) {
+		setContentId(contentId);
 		setText(text);
 		setContentType("text/plain; charset=\"utf-8\"");
 	}
